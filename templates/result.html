@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OptiCrop — Result</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-brand">🌱 OptiCrop</div>
+    <span class="nav-tag">Smart Agricultural Engine</span>
+  </nav>
+
+  <main class="container">
+
+    <div class="result-card">
+      <div class="result-icon">🌾</div>
+      <p class="result-label">Recommended crop for your conditions</p>
+      <h1 class="result-crop">{{ crop }}</h1>
+      <div class="confidence-bar-wrap">
+        <div class="confidence-bar"
+             style="width: {{ confidence }}%"></div>
+      </div>
+      <p class="confidence-text">Confidence: <strong>{{ confidence }}%</strong></p>
+    </div>
+
+    <div class="input-summary">
+      <h2>Your Input Parameters</h2>
+      <div class="summary-grid">
+        <div class="summary-item">
+          <span class="summary-label">Nitrogen (N)</span>
+          <span class="summary-val">{{ inputs.N }} kg/ha</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Phosphorus (P)</span>
+          <span class="summary-val">{{ inputs.P }} kg/ha</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Potassium (K)</span>
+          <span class="summary-val">{{ inputs.K }} kg/ha</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Temperature</span>
+          <span class="summary-val">{{ inputs.temperature }} °C</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Humidity</span>
+          <span class="summary-val">{{ inputs.humidity }} %</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">pH Level</span>
+          <span class="summary-val">{{ inputs.ph }}</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Rainfall</span>
+          <span class="summary-val">{{ inputs.rainfall }} mm</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="top3">
+      <h2>Top 3 Alternatives</h2>
+      <div class="top3-grid">
+        {% for item in top3 %}
+        <div class="top3-card {% if loop.index == 1 %}top3-best{% endif %}">
+          <span class="top3-rank">#{{ loop.index }}</span>
+          <span class="top3-crop">{{ item.crop }}</span>
+          <span class="top3-score">{{ item.score }}%</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <a href="/" class="btn-back">← Try Another Prediction</a>
+
+  </main>
+
+  <footer>
+    <p>OptiCrop · Powered by Machine Learning · Built with Flask</p>
+  </footer>
+
+</body>
+</html>
