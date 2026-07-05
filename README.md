@@ -224,8 +224,7 @@ opticrop/
 ├── static/
 │   └── style.css                # App styling
 │
-├── notebooks/
-│   └── opticrop_analysis.ipynb # EDA + model training notebook
+├── opticrop_analysis.ipynb # EDA + model training notebook
 │
 ├── Crop_recommendation.csv      # Dataset
 ├── train.py                     # Model training script
